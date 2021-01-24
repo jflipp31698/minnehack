@@ -2,18 +2,17 @@ from tkinter import *
 from sinbad import *
 
 ds = DataSource.connect("http://www.fueleconomy.gov/ws/rest/vehicle/menu/options", format="xml")
-ds.set_param("year", "2011")
+ds.set_param("year", "2020")
 ds.set_param("make", "Toyota").set_param("model", "Camry")
 ds.load()
-try:
-    print(ds.fetch()[0]['value'])
-except Exception as e:
-    print("Couldn't retrieve data.")
+vehicle_id = ds.fetch()[0]['value']
+vehicle_data = "https://www.fueleconomy.gov/ws/rest/vehicle/" + vehicle_id
+ds = DataSource.connect(vehicle_data, format="xml")
+ds.load()
+mileage = ds.fetch("comb08U")
 
 
-
-
-
+print(mileage)
 
 
 window = Tk()
