@@ -10,7 +10,6 @@ def clear_entry(event, entry):
     entry.delete(0, tk.END)
 
 def getMileage(year, make, model):
-
     ds = DataSource.connect("http://www.fueleconomy.gov/ws/rest/vehicle/menu/options", format="xml")
     ds.set_param("year", str(year))
     ds.set_param("make", make).set_param("model", model)
@@ -19,12 +18,9 @@ def getMileage(year, make, model):
     vehicle_data = "https://www.fueleconomy.gov/ws/rest/vehicle/" + vehicle_id
     ds = DataSource.connect(vehicle_data, format="xml")
     ds.load()
-    mileage = ds.fetch("comb08U")
+    mileage = ds.fetch("comb08")
 
-    if (mileage == "0.0"):
-        return random.randint(20, 40)
-    else:
-        return mileage
+    return mileage
     
 
 
