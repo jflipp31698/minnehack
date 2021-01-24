@@ -19,12 +19,9 @@ def getMileage(year, make, model):
     vehicle_data = "https://www.fueleconomy.gov/ws/rest/vehicle/" + vehicle_id
     ds = DataSource.connect(vehicle_data, format="xml")
     ds.load()
-    mileage = ds.fetch("comb08U")
+    mileage = ds.fetch("comb08")
 
-    if (mileage == "0.0"):
-        return random.randint(20, 40)
-    else:
-        return mileage
+    return mileage
     
 
 
